@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block body %}
+
+
+
+<!--announsment slide show-->
+<div class="announsment">
+    <div class="scroll-left" style="background-color:#a233c4;">
+        {% for i in annons %}
+        <marquee behavior="scroll" direction="left">{{i.annosmt}}</marquee>
+        {% endfor %}
+   </div>
+</div>
+<!--notification-->
+<div class="custom_image  col-xm-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12" style="margin-bottom:100px;margin-top:100px;">
+    <div class="notification col shadow p-3 mb-5 bg-body-tertiary rounded text-center">
+        <label class="notify padding-bottom:10px;" style=" background-image: url(static/img/Notification.png); background-position: bottom; background-repeat: no-repeat; width: 100%; background-size: cover; background-clip: 10px; background-origin: initial; width: 100%; background-size: 100% 100%;"><b>Notifications</b></label>
+        <div class="row mx-auto">
+            <div class="col">
+                <div class="scroll-container padding-scroll-top col-xm-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 background_img" style=" padding-top:10%;padding-left:13px;background-position: bottom;width: 300px;height: 300px;text-shadow: white 3px 0px 2px;font-size: 20px;background-repeat: no-repeat;width:100%;height:100%;background-size: contain;background-clip: 100px;background-origin: initial;background-width: 100%;background-height:auto;">
+                    <div class="">
+                        <div class="" >
+                            {% for i in im %}
+                            <div style="margin-bottom:30px;font-size:15px;text-decoration: none;overflow: hidden;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;text-align:center;">
+                                <li>
+                                    <b ><a href="{% url 'palaApp1:notification' i.id %}" style="text-decoration:none;color:red;">{{i.notify}}</a></b>
+                                </li>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- pooja time   -->
+    <div class="pooja_time col-6 shadow p-3 mb-5 bg-body-tertiary rounded text-center">
+        <label class="notify" style="background-image: url(static/img/Notification.png); background-position: bottom; background-repeat: no-repeat; width: 100%; background-size: cover; background-clip: 10px; background-origin: initial; width: 100%; background-size: 100% 100%;"><b>Pooja Times</b></label>
+        <div class="row mx-auto">
+            <div class="col">
+                <div class="scroll-container padding-scroll-top col-xm-6 col-sm-6 col-md-6 col-lg-12 col-xl-12 col-xxl-12 background_img" style=" padding-top:10%;padding-left:13px;background-position: bottom;width: 300px;height: 300px;text-shadow: white 0px 0px 2px;font-size: 20px;background-repeat: no-repeat;width:100%;height:100%;background-size: contain;background-clip: 100px;background-origin: initial;background-width: 100%;background-height:auto;">
+                    <div class="pooja_time">
+                        {% for i in time %}
+                        <div class="" style="margin-bottom:30px;">
+                            <li>
+                              <b>{{i.pooja_name}}<br>{{i.poojatime_from}} to {{i.poojatime_to}}</b>
+                            </li>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Feeds-->
+<div class="main_center  custom_image col-12 shadow p-3 mb-5  rounded text-center col-xm-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12" style="margin-top:100px;">
+        <div class="row mx-auto" style="padding-left:200px;padding-right:200px;">
+            <label class="feeds " style=" background-image: url(static/img/Notification.png);max-height:100px; background-position: bottom; background-repeat: no-repeat; width: 100%; background-size: cover; background-clip: 10px; background-origin: initial; width: 100%; background-size: 100% 100%;font-size:50px;"><b>Feeds</b></label>
+            {% for i in feeds %}
+            <div class="mt_bottom_margin col-xm-6 col-sm-6 col-md-6 col-lg-3" style="margin-top:50px;"><a  href="{% url 'palaApp1:details' i.id %}" style="text-decoration:none;color:black;">
+                <div class="card"  style="max-width: 13rem;text-decoration: none;">
+                    <img src="{{i.img.url}}" class="my_images" style="width:100%;height:200px;" alt="...">
+                    <div class="card-body">
+                        <h3 class="card-tittle" style="text-decoration: none;overflow: hidden;display: -webkit-box;-webkit-line-clamp:1 ;-webkit-box-orient: vertical;text-align:center;">{{i.name}}</h3>
+                    </div>
+                </div></a>
+            </div>
+            {% endfor %}
+        </div>
+</div>
+<!--paginator-->
+<div class="mx-auto">
+    {% if feeds.paginator.num_pages > 1%}
+    <p><b>page: {{ feeds.number }}/{{ feeds.paginator.num_pages }}</b></p>
+    <div class="text-center">
+        {% if feeds.has_previous %}
+            <a class="btn btn-primary" href="{% url 'palaApp1:index' %}?page={{ feeds.previous_page_number }}" style="">Previous</a>
+        {% endif %}
+            {% for pg in feeds.paginator.page_range %}
+                <a href="?page={{pg}}" class="btn btn-light bt-sm {% if feeds.number == pg %} active{% endif %}">{{pg}}</a>
+            {% endfor%}
+        {% if feeds.has_next %}
+            <a class="btn btn-primary" href="{% url 'palaApp1:index' %}?page={{ feeds.next_page_number }}">Next</a>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+
+

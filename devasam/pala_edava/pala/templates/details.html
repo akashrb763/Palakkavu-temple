@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<div class="container" style="max-width: 60%;width:100%;padding-top:15px;">
+    <div class="row">
+        <div class=" col-xm-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+
+            <img src="{{feeds.img.url}}" width="200" height="200">
+
+        </div>
+        <div class="col-md-6" style="max-width: 100%;width:100%;padding-bottom:45px;">
+            <h3>{{feeds.name}}</h3>
+            <h5>{{feeds.description}}</h5>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

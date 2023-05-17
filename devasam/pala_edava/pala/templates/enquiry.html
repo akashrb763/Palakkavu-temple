@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Using mailto link</title>
+	<style>
+	h1 {
+		color: green;
+	}
+
+	.container {
+		width: 400px;
+		border: 2px solid black;
+		padding: 15px;
+	}
+	</style>
+</head>
+
+{% block body %}
+<div class="container col-4" style="outer-line:black;max-width: 80%;margin-top:100px;background-color:#dee0e0;">
+	<div class="container" style="max-width: 60%;">
+		<h1>Ask A Quastion</h1>
+
+		<form method="POST" action="{% url 'palaApp1:enquiry' %}" enctype="multipart/form-data">
+			{% csrf_token %}
+			<div class="control">
+				Name:
+					<input aria-required="" name="name" type="text" placeholder="Full Name">
+			</div>
+			<br>
+			<div class="control">
+				Phone no:<input aria-required="" name="mobile_number" type="tel" placeholder="Mobile No">
+			</div>
+			<br>
+			<div class="control">
+				Details:
+				<textarea rows="7" cols="30" name="qury" placeholder="Enter Your Qury"></textarea>
+			</div>
+			<br>
+			<div class="control">
+				<input class="btn btn-primary" type="submit"  value="submit" style="width: 100%;" >
+			</div>
+		</form>
+	</div>
+
+ </div>
+{% endblock %}
+</html>
